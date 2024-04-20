@@ -1,33 +1,37 @@
 NAME = pipex
 CC=cc
-CFLAGS=-Wall -Wextra -Werror -g
+FLAGS=-Wall -Wextra -Werror -g
 OBJ_DIR = obj
+SRC_DIR = src
 
-SOURCES = \
-		main.c processes.c utils.c ft_split.c
+SOURCES = main.c processes.c utils.c ft_split.c
+#SRC_PATH = $(addprefix $(SRC_DIR)/, $(SOURCES))
+OBJECTS =  $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 
-#OBJECTS = $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
-OBJECTS = $(SOURCES:.c=.o)
-
-DEPS=pipex.h
 
 all: $(NAME)
 $(NAME) : $(OBJECTS)
-	$(CC) $(FLAGS) $(OBJECTS) -o $@
+	@$(CC) $(FLAGS) -o $@ $^
+	@echo "==== $(GREEN)$(NAME) created!$(DEFAULT) ===="
 	
-# $(CC) $(FLAGS) $(OBJECTS:%=$(OBJ_DIR)/%) -o $@
-
-#$(OBJ_DIR)/%.o:%.c
-%.o:%.c
-#@mkdir -p $(OBJ_DIR)
-	$(CC) $(FLAGS) -c $< -o $@
+$(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(FLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(OBJECTS) 
+	@rm -rf $(OBJECTS)
+	@rm -rf $(OBJ_DIR)
+	@echo "$(YELLOW)Object files deleted!$(DEFAULT)"
 
 fclean: clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
+	@echo "$(YELLOW)$(NAME) has been removed$(DEFAULT)"
 
 re: fclean all
 
 .PHONY: all clean fclean re
+
+#Colors
+YELLOW = \033[1;33m
+GREEN = \033[1;32m
+DEFAULT = \033[0m
