@@ -6,7 +6,7 @@
 /*   By: mtocu <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 17:50:58 by mtocu             #+#    #+#             */
-/*   Updated: 2024/04/20 12:51:16 by mtocu            ###   ########.fr       */
+/*   Updated: 2024/05/09 13:54:31 by mtocu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,11 @@ void	child_process(char **argv, char **envp, int *fd)
 	int	filein;
 
 	filein = open(argv[1], O_RDONLY);
+	if (access(argv[1], W_OK) == -1)
+	{
+		perror("");
+		exit(EXIT_FAILURE);
+	}
 	if (filein == -1)
 		error();
 	dup2(filein, STDIN_FILENO); // read from file
@@ -77,6 +82,11 @@ void	parent_process(char **argv, char **envp, int *fd)
 	int	fileout;
 
 	fileout = open(argv[4], O_CREAT | O_WRONLY | O_TRUNC, 0777);
+	if (access(argv[4], W_OK) == -1)
+	{
+		perror("");
+		exit(EXIT_FAILURE);
+	}
 	if (fileout == -1)
 		error();
 	dup2(fd[0], STDIN_FILENO); // read from 0
