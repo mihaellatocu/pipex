@@ -6,7 +6,7 @@
 /*   By: mtocu <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 17:50:01 by mtocu             #+#    #+#             */
-/*   Updated: 2024/05/16 11:28:15 by mtocu            ###   ########.fr       */
+/*   Updated: 2024/05/16 17:10:02 by mtocu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ typedef struct s_context
 	pid_t	pid;
 	int		filein;
 	int		fileout;
-	int 	prev_fd;
-}		 t_context;
+	int		prev_fd;
+}			t_context;
 
 char	*ft_strjoin(char *s1, char *s2);
 char	**ft_split(char const *s, char c);

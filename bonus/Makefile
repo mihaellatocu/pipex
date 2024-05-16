@@ -3,7 +3,6 @@ CC=cc
 FLAGS=-Wall -Wextra -Werror -g
 OBJ_DIR = obj
 SRC_DIR = src
-BONUS_DIR = bonus
 
 SOURCES = main.c processes.c utils.c ft_split.c
 #SRC_PATH = $(addprefix $(SRC_DIR)/, $(SOURCES))
