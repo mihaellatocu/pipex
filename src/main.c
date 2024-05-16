@@ -6,11 +6,23 @@
 /*   By: mtocu <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 17:49:47 by mtocu             #+#    #+#             */
-/*   Updated: 2024/04/20 12:51:07 by mtocu            ###   ########.fr       */
+/*   Updated: 2024/05/16 11:37:47 by mtocu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
+
+void	error(void)
+{
+	perror("Error");
+	exit(EXIT_FAILURE);
+}
+
+void	ft_error(const char *message)
+{
+	perror(message);
+	exit(1);
+}
 
 int	main(int argc, char *argv[], char **envp)
 {

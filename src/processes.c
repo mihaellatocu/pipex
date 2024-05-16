@@ -6,7 +6,7 @@
 /*   By: mtocu <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 17:50:58 by mtocu             #+#    #+#             */
-/*   Updated: 2024/05/09 13:54:31 by mtocu            ###   ########.fr       */
+/*   Updated: 2024/05/16 11:37:04 by mtocu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ char	*find_path(char *cmd, char **envp)
 		free(path);
 		i++;
 	}
+	ft_error("The command is not valid");
 	return (0);
 }
 
@@ -69,8 +70,8 @@ void	child_process(char **argv, char **envp, int *fd)
 	}
 	if (filein == -1)
 		error();
-	dup2(filein, STDIN_FILENO); // read from file
-	dup2(fd[1], STDOUT_FILENO); //writing in 1
+	dup2(filein, STDIN_FILENO);
+	dup2(fd[1], STDOUT_FILENO);
 	close(filein);
 	close(fd[0]);
 	close(fd[1]);
@@ -89,8 +90,8 @@ void	parent_process(char **argv, char **envp, int *fd)
 	}
 	if (fileout == -1)
 		error();
-	dup2(fd[0], STDIN_FILENO); // read from 0
-	dup2(fileout, STDOUT_FILENO); // writing in the file
+	dup2(fd[0], STDIN_FILENO);
+	dup2(fileout, STDOUT_FILENO);
 	close(fileout);
 	close(fd[0]);
 	close(fd[1]);
